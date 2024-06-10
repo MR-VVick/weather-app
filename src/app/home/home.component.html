@@ -1,0 +1,75 @@
+<div class="main-container">
+    <mat-form-field class="w-100" appearance="outline">
+        <mat-icon matPrefix>search</mat-icon>
+        <input  class="search-input" matInput [(ngModel)]="searchInputValue" (input)="onInputChange()" placeholder="Search for a location">
+    </mat-form-field>
+
+    <div class="location-and-date">
+        <h1 class="location-and-date-location">{{ currentWeather?.location?.name }}, {{ currentWeather?.location?.country }}</h1>
+        <div>{{ formatDate(currentWeather?.location?.localtime  ?? '') }}</div>
+    </div>
+
+    <div class="current-temperature">  
+        <div class="current-temperature-icon-container">  
+            <img class="current-temperature-icon" src="{{ currentWeather?.current?.condition?.icon }}"/>
+        </div>  
+        <div class="current-temperature-content-container">  
+            <div class="current-temperature-value">{{ currentWeather?.current?.temp_c | number: '1.0-0' }}°</div>  
+            <div class="current-temperature-summary">{{ currentWeather?.current?.condition?.text }}</div>  
+        </div>  
+    </div>
+
+    <div class="current-stats">
+        <div>
+            <div class="current-stats-value">{{ currentWeather?.current?.feelslike_c | number: '1.0-0' }}&deg;</div>
+            <div class="current-stats-label">Feels like</div>
+            <div class="current-stats-value">{{ currentWeather?.current?.uv }}</div>
+            <div class="current-stats-label">UV Index</div>
+        </div>
+        <div>
+            <div class="current-stats-value">{{ currentWeather?.current?.wind_kph| number: '1.0-0' }}kph</div>
+            <div class="current-stats-label">Wind</div>
+            <div class="current-stats-value">{{ currentWeather?.current?.humidity| number: '1.0-0' }}%</div>
+            <div class="current-stats-label">Humidity</div>
+        </div>
+        <div>
+            <div class="current-stats-value">{{ currentWeather?.current?.dewpoint_c| number: '1.0-0'  }}&deg;</div>
+            <div class="current-stats-label">Dew point</div>
+            <div class="current-stats-value">{{ currentWeather?.current?.vis_km  }}km</div>
+            <div class="current-stats-label">Visibility</div>
+        </div>
+    </div>
+ 
+    <div class="next-5-days">
+        <h2 class="next-5-days-heading">Next 3 days</h2>
+        <div class="next-5-days-container">
+            @for( data of forecastWeather?.forecastday?.slice(1); track data?.date_epoch) {
+                <div class="next-5-days-row">
+                    <div class="next-5-days-date">
+                        {{ formatDay(data?.date  ?? '') }}
+                        <div class="next-5-days-label">{{ formatShortDate(data?.date  ?? '') }}</div>
+                    </div>
+                    <div class="next-5-days-low">
+                        {{ data?.day?.mintemp_c| number: '1.0-0' }}&deg;
+                        <div class="next-5-days-label">Low</div>
+                    </div>
+                    <div class="next-5-days-high">
+                        {{ data?.day?.maxtemp_c| number: '1.0-0' }}&deg;
+                        <div class="next-5-days-label">High</div>
+                    </div>
+                    <div class="next-5-days-icon">
+                        <img src="{{ data?.day?.condition?.icon }}" height="50" width="50"/>
+                    </div>
+                    <div class="next-5-days-rain">
+                        {{ data?.day?.daily_chance_of_rain| number: '1.0-0' }}%
+                        <div class="next-5-days-label">Rain</div>
+                    </div>
+                    <div class="next-5-days-wind">
+                        {{data?.day?.maxwind_kph| number: '1.0-0' }}kph
+                        <div class="next-5-days-label">Wind</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
