@@ -41,8 +41,12 @@ export class HomeComponent implements OnInit {
   }
 
   onInputChange() {
-    this.loadData(this.searchInputValue);
-    this.loadForecastData(this.searchInputValue);
+    if (!this.searchInputValue.trim()) {
+      this.getLocation();
+    } else {
+      this.loadData(this.searchInputValue);
+      this.loadForecastData(this.searchInputValue);
+    }
   }
 
   getLocation(): void {
