@@ -1,29 +1,17 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeolocationService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCurrentPosition(): Promise<{lat: number, lng: number}> {
-    return new Promise((resolve, reject) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            resolve({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            });
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      } else {
-        reject(new Error('Geolocation is not supported by this browser.'));
-      }
-    });
+  getLocationByIP(): Observable<any> {
+    // Assuming you have an IP geolocation API endpoint
+    const apiUrl = 'http://ip-api.com/json/';
+    return this.http.get(apiUrl);
   }
 }

@@ -30,8 +30,6 @@ export class HomeComponent implements OnInit {
   private dateHelperService = inject(DateHelperService)
   currentWeather: CurrentWeather | null = null
   forecastWeather: ForecastWeather| null = null
-  lat: number | undefined;
-  lng: number | undefined;
   searchInputValue: string = '';
 
   constructor(private geolocationService: GeolocationService) {}
@@ -50,17 +48,12 @@ export class HomeComponent implements OnInit {
   }
 
   getLocation(): void {
-  this.geolocationService.getCurrentPosition()
-    .then(position => {
-      this.lat = position.lat;
-      this.lng = position.lng;
-      const locationString = `${this.lat},${this.lng}`;
-      this.loadData(locationString);
-      this.loadForecastData(locationString);
-    })
-    .catch(error => {
-      console.error('Error getting location', error);
-    });
+    this.geolocationService.getLocationByIP()
+      .subscribe((location: any) => {
+        const locationString = location.city;
+        this.loadData(locationString);
+        this.loadForecastData(locationString);
+      });
   }
 
   loadData(location: string){
