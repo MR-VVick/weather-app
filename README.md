@@ -1,27 +1,62 @@
-# WeatherApp
+# Weather App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+## Description
+The Weather App is an Angular-based application that provides weather information based on the user's geolocation. It uses IP-based geolocation to fetch the user's location and then retrieves the weather data for that location.
 
-## Development server
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Key Angular Features](#key-angular-features)
+- [License](#license)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/MR-VVick/weather-app.git
+    ```
+2. **Navigate to the project directory:**
+    ```bash
+    cd weather-app
+    ```
+3. **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Code scaffolding
+## Usage
+1. **Start the development server:**
+    ```bash
+    ng serve
+    ```
+2. **Open a web browser and navigate to:**
+    ```
+    http://localhost:4200
+    ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Architecture
+The application follows a standard Angular project structure:
 
-## Build
+- **src/app**: Contains the core application code.
+  - **home**: Contains components related to the home page.
+    - **home.component.ts**: The main component for displaying weather information.
+    - **home.component.html**: The template for the home component.
+    - **home.component.scss**: The styles for the home component.
+  - **interfaces**: Defines TypeScript interfaces for the data models used in the application.
+    - **currentWeather.ts**: Interface for current weather data.
+    - **forecastWeather.ts**: Interface for forecast weather data.
+  - **services**: Contains service classes that handle data fetching and business logic.
+    - **geolocation.service.ts**: Service for fetching geolocation data based on the user's IP.
+    - **home.service.ts**: Service for fetching weather data from the API.
+    - **date-helper.service.ts**: Service for date-related utility functions.
+- **public**: Contains static assets for the application.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Key Angular Features
+- **Components**: The application is built using Angular components, each responsible for a specific part of the UI. For example, `home.component.ts` is responsible for displaying weather information on the home page.
+- **Services**: Angular services are used to handle business logic and data fetching. The `GeolocationService` fetches the user's location, and the `HomeService` fetches weather data.
+- **Dependency Injection**: Services are injected into components and other services using Angular's dependency injection system.
+- **Observables**: The application uses RxJS Observables for asynchronous data streams. For example, the `getLocationByIP` method in `GeolocationService` returns an `Observable` that emits the user's location data.
+- **HTTP Client**: The Angular `HttpClient` module is used to make HTTP requests to external APIs.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+This project is licensed under the MIT License.
