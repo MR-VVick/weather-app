@@ -10,8 +10,7 @@ export class GeolocationService {
   constructor(private http: HttpClient) { }
 
   getLocationByIP(): Observable<any> {
-    // Assuming you have an IP geolocation API endpoint
-    const apiUrl = 'http://ip-api.com/json/';
+    const apiUrl = 'https://ipapi.co/json/';
     return this.http.get(apiUrl);
   }
 }
